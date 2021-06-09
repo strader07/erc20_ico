@@ -1,4 +1,4 @@
-pragma solidity ^0.4.2;
+pragma solidity ^0.5.16;
 
 contract V7sionToken {
     string  public name = "V7sion Token";
@@ -21,7 +21,7 @@ contract V7sionToken {
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
-    function V7sionToken (uint256 _initialSupply) public {
+    constructor (uint256 _initialSupply) public {
         balanceOf[msg.sender] = _initialSupply;
         totalSupply = _initialSupply;
     }
@@ -32,7 +32,7 @@ contract V7sionToken {
         balanceOf[msg.sender] -= _value;
         balanceOf[_to] += _value;
 
-        Transfer(msg.sender, _to, _value);
+        emit Transfer(msg.sender, _to, _value);
 
         return true;
     }
@@ -40,7 +40,7 @@ contract V7sionToken {
     function approve(address _spender, uint256 _value) public returns (bool success) {
         allowance[msg.sender][_spender] = _value;
 
-        Approval(msg.sender, _spender, _value);
+        emit Approval(msg.sender, _spender, _value);
 
         return true;
     }
@@ -54,7 +54,7 @@ contract V7sionToken {
 
         allowance[_from][msg.sender] -= _value;
 
-        Transfer(_from, _to, _value);
+        emit Transfer(_from, _to, _value);
 
         return true;
     }
