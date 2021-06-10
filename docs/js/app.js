@@ -30,14 +30,14 @@ App = {
       App.contracts.V7sionTokenSale = TruffleContract(V7sionTokenSale);
       App.contracts.V7sionTokenSale.setProvider(App.web3Provider);
       App.contracts.V7sionTokenSale.deployed().then(function(V7sionTokenSale) {
-        console.log("Dapp Token Sale Address:", V7sionTokenSale.address);
+        console.log("V7sion Token Sale Address:", V7sionTokenSale.address);
       });
     }).done(function() {
       $.getJSON("V7sionToken.json", function(V7sionToken) {
         App.contracts.V7sionToken = TruffleContract(V7sionToken);
         App.contracts.V7sionToken.setProvider(App.web3Provider);
         App.contracts.V7sionToken.deployed().then(function(V7sionToken) {
-          console.log("Dapp Token Address:", V7sionToken.address);
+          console.log("V7sion Token Address:", V7sionToken.address);
         });
 
         App.listenForEvents();
@@ -100,7 +100,7 @@ App = {
         V7sionTokenInstance = instance;
         return V7sionTokenInstance.balanceOf(App.account);
       }).then(function(balance) {
-        $('.dapp-balance').html(balance.toNumber());
+        $('.V7sion-balance').html(balance.toNumber());
         App.loading = false;
         loader.hide();
         content.show();

@@ -79,7 +79,7 @@ contract('V7sionTokenSale', function(accounts) {
     }).then(function(receipt) {
       return tokenInstance.balanceOf(admin);
     }).then(function(balance) {
-      assert.equal(balance.toNumber(), 999990, 'returns all unsold dapp tokens to admin');
+      assert.equal(balance.toNumber(), 999990, 'returns all unsold V7sion tokens to admin');
       // Check that the contract has no balance
       return tokenInstance.balanceOf(tokenSaleInstance.address)
     }).then(function(balance) {
