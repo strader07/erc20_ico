@@ -1,5 +1,5 @@
 {
-  "name": "dapp-token-sale",
+  "name": "v7sion-token-sale",
   "version": "1.0.0",
   "description": "V7sion Token Sale ICO",
   "main": "truffle-config.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "lite-server"
   },
-  "author": "Gregory",
+  "author": "V7sion",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.3.0"
