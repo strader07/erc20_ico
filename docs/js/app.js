@@ -112,7 +112,11 @@ App = {
     $('#content').hide();
     $('#loader').show();
     var numberOfTokens = $('#numberOfTokens').val();
+    console.log(numberOfTokens)
     App.contracts.V7sionTokenSale.deployed().then(function(instance) {
+      console.log(instance);
+      console.log(App.account);
+      console.log(numberOfTokens * App.tokenPrice);
       return instance.buyTokens(numberOfTokens, {
         from: App.account,
         value: numberOfTokens * App.tokenPrice,
