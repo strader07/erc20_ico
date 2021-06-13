@@ -1,3 +1,5 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -8,10 +10,12 @@ module.exports = {
       network_id: "*" // match any network id
     },
     rinkeby: {
-      host: "localhost",
-      port: 8545,
-      network_id: 4,
-      gas: 4700000
+      provider: () => new HDWalletProvider(`raven reveal skirt naive road tray safe come session maple father enlist`, `https://rinkeby.infura.io/v3/4e39e2f271624a6ab52cfd035f0db773`),
+       network_id: 4,
+       gas: 5500000,
+       confirmations: 2,
+       timeoutBlocks: 200,
+       skipDryRun: true
     }
   }
 };
