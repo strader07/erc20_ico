@@ -31,14 +31,12 @@ App = {
       App.contracts.V7sionTokenSale = TruffleContract(V7sionTokenSale);
       App.contracts.V7sionTokenSale.setProvider(App.web3Provider);
       App.contracts.V7sionTokenSale.deployed().then(function(V7sionTokenSale) {
-        console.log("V7sion Token Sale Address:", V7sionTokenSale.address);
       });
     }).done(function() {
       $.getJSON("V7sionToken.json", function(V7sionToken) {
         App.contracts.V7sionToken = TruffleContract(V7sionToken);
         App.contracts.V7sionToken.setProvider(App.web3Provider);
         App.contracts.V7sionToken.deployed().then(function(V7sionToken) {
-          console.log("V7sion Token Address:", V7sionToken.address);
         });
 
         App.listenForEvents();
@@ -54,7 +52,7 @@ App = {
         fromBlock: 0,
         toBlock: 'latest',
       }).watch(function(error, event) {
-        console.log("event triggered", event);
+        console.log("event triggered: ", event);
         App.render();
       })
     })
@@ -126,24 +124,6 @@ App = {
     }).catch(function (err){
       console.log(err, "buy token error");
     });
-
-    // App.contracts.V7sionTokenSale.deployed().then(function(instance) {
-    //   val = parseInt(numberOfTokens * App.tokenPrice)
-    //   console.log("number of tokens: ", numberOfTokens);
-    //   console.log("value: ", val)
-    //   console.log("instance: ", instance)
-    //   return instance.buyTokens(numberOfTokens, {
-    //     from: App.account,
-    //     value: val,
-    //     gas: 500000 // Gas limit
-    //   });
-    // }).then(function(result) {
-    //   console.log("Tokens bought...", result)
-    //   $('form').trigger('reset') // reset number of tokens in form
-    //   // Wait for Sell event
-    // }).catch(function (err){
-    //   console.log(err, "buy token error");
-    // });
   }
 }
 
