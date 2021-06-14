@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
+  admin: '0x2e7816f64c9c58024d385c1a0948d1ff8a9092d2',
   loading: false,
   tokenPrice: 1000000000000000,
   tokensSold: 0,
@@ -111,18 +112,38 @@ App = {
   buyTokens: function() {
     $('#content').hide();
     $('#loader').show();
-    var numberOfTokens = $('#numberOfTokens').val();
+    var numberOfTokens = parseInt($('#numberOfTokens').val());
     App.contracts.V7sionTokenSale.deployed().then(function(instance) {
-      return instance.buyTokens(numberOfTokens, {
+      tokenSaleInstance = instance;
+      return tokenSaleInstance.buyTokens(numberOfTokens, {
         from: App.account,
         value: numberOfTokens * App.tokenPrice,
         gas: 500000 // Gas limit
-      });
-    }).then(function(result) {
-      console.log("Tokens bought...")
+      })
+    }).then(function(result){
+      console.log("Tokens bought...", result);
       $('form').trigger('reset') // reset number of tokens in form
-      // Wait for Sell event
+    }).catch(function (err){
+      console.log(err, "buy token error");
     });
+
+    // App.contracts.V7sionTokenSale.deployed().then(function(instance) {
+    //   val = parseInt(numberOfTokens * App.tokenPrice)
+    //   console.log("number of tokens: ", numberOfTokens);
+    //   console.log("value: ", val)
+    //   console.log("instance: ", instance)
+    //   return instance.buyTokens(numberOfTokens, {
+    //     from: App.account,
+    //     value: val,
+    //     gas: 500000 // Gas limit
+    //   });
+    // }).then(function(result) {
+    //   console.log("Tokens bought...", result)
+    //   $('form').trigger('reset') // reset number of tokens in form
+    //   // Wait for Sell event
+    // }).catch(function (err){
+    //   console.log(err, "buy token error");
+    // });
   }
 }
 

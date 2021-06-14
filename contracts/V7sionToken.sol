@@ -2,7 +2,7 @@ pragma solidity ^0.5.16;
 
 contract V7sionToken {
     string  public name = "V7sion Token";
-    string  public symbol = "VSNT";
+    string  public symbol = "V7SN";
     string  public standard = "V7sion Token v1.0";
     uint256 public totalSupply;
 

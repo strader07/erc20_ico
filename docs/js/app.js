@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
+  admin: '0x2e7816f64c9c58024d385c1a0948d1ff8a9092d2',
   loading: false,
   tokenPrice: 1000000000000000,
   tokensSold: 0,
@@ -12,22 +13,14 @@ App = {
     return App.initWeb3();
   },
 
-  initWeb3: async function() {
-    if (window.ethereum) {
-      this.provider = window.ethereum;
-      try {
-        await window.ethereum.enable();
-      } catch (error) {
-        console.error("User denied account access");
-      }
-    }
+  initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
       web3 = new Web3(web3.currentProvider);
     } else {
       // Specify default instance if no web3 instance provided
-      App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
     }
     return App.initContracts();
@@ -119,24 +112,38 @@ App = {
   buyTokens: function() {
     $('#content').hide();
     $('#loader').show();
-    var numberOfTokens = $('#numberOfTokens').val();
-    console.log(numberOfTokens)
+    var numberOfTokens = parseInt($('#numberOfTokens').val());
     App.contracts.V7sionTokenSale.deployed().then(function(instance) {
-      console.log(instance);
-      console.log(App.account);
-      console.log(numberOfTokens * App.tokenPrice);
-      return instance.buyTokens(numberOfTokens, {
+      tokenSaleInstance = instance;
+      return tokenSaleInstance.buyTokens(numberOfTokens, {
         from: App.account,
         value: numberOfTokens * App.tokenPrice,
         gas: 500000 // Gas limit
-      });
-    }).then(function(result) {
-      console.log("Tokens bought...")
-      // $('form').trigger('reset') // reset number of tokens in form
-      // Wait for Sell event
-    }).catch(function (err) {
-      console.log("buy token error => ", err)
+      })
+    }).then(function(result){
+      console.log("Tokens bought...", result);
+      $('form').trigger('reset') // reset number of tokens in form
+    }).catch(function (err){
+      console.log(err, "buy token error");
     });
+
+    // App.contracts.V7sionTokenSale.deployed().then(function(instance) {
+    //   val = parseInt(numberOfTokens * App.tokenPrice)
+    //   console.log("number of tokens: ", numberOfTokens);
+    //   console.log("value: ", val)
+    //   console.log("instance: ", instance)
+    //   return instance.buyTokens(numberOfTokens, {
+    //     from: App.account,
+    //     value: val,
+    //     gas: 500000 // Gas limit
+    //   });
+    // }).then(function(result) {
+    //   console.log("Tokens bought...", result)
+    //   $('form').trigger('reset') // reset number of tokens in form
+    //   // Wait for Sell event
+    // }).catch(function (err){
+    //   console.log(err, "buy token error");
+    // });
   }
 }
 
