@@ -10,7 +10,7 @@ module.exports = {
       network_id: "*" // match any network id
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(`raven reveal skirt naive road tray safe come session maple father enlist`, `https://rinkeby.infura.io/v3/4e39e2f271624a6ab52cfd035f0db773`),
+      provider: () => new HDWalletProvider(`[your phrases]`, `https://rinkeby.infura.io/v3/4e39e2f271624a6ab52cfd035f0db773`),
        network_id: 4,
        gas: 5500000,
        confirmations: 2,
