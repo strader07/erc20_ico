@@ -10,7 +10,7 @@ module.exports = {
       network_id: "*" // match any network id
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(`[your phrases]`, `https://rinkeby.infura.io/v3/4e39e2f271624a6ab52cfd035f0db773`),
+      provider: () => new HDWalletProvider(`<your phrases>`, `https://rinkeby.infura.io/v3/<your infura project link to rinkeby testnet>`),
        network_id: 4,
        gas: 5500000,
        confirmations: 2,
